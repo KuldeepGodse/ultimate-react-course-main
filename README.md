@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Course Material and FAQ for the Ultimate React Course
 
 This branch of the repo contains starter files and final code for all sections and projects of the course, **exactly as shown in the videos**.
@@ -66,3 +67,6 @@ Use starter code to start each section, and **final code to compare it with your
 ### Q12: Do you accept pull requests?
 
 **A:** No, because this repository should contain the _exact_ same code that is shown in the videos. _However, feel free to add an issue if you found one._
+=======
+# ultimate-react-course-main
+>>>>>>> b0ff1bf68c834bc6d356f7efd36bdbdbca9d4425
