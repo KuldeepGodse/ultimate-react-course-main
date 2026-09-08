@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Portal</title>
+    <style>
+        body{font-family:Arial;background:#eee}
+        .header { background: blue; color:white; padding:10px }
+        .box{margin:10px;padding:10px;border:1px solid black}
+        table { width:100%; }
+        td { padding: 5px; }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>Employee Portal</h1>
+</div>
+
+<div class="box">
+    <h2>Welcome <span id="userName">User</span></h2>
+
+    <img src="logo.png">
+
+    <form>
+        <input type="text" id="name" placeholder="Enter name">
+        <input type="text" id="email" placeholder="Email">
+        <input type="password" id="password">
+        <button onclick="saveUser()">Save User</button>
+    </form>
+</div>
+
+<div class="box">
+    <h2>Employees</h2>
+    <table border="1">
+        <tr>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Department</td>
+        </tr>
+        <tr>
+            <td>John Smith</td>
+            <td>john@example.com</td>
+            <td>IT</td>
+        </tr>
+        <tr>
+            <td>Mary</td>
+            <td>mary@example.com</td>
+            <td>HR</td>
+        </tr>
+    </table>
+</div>
+
+<div class="box">
+    <h2>Search</h2>
+    <input id="search" type="text">
+    <button onclick="searchEmployee()">Search</button>
+    <div id="result"></div>
+</div>
+
+<script>
+var employees = [];
+var currentUser = null;
+
+function saveUser() {
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+
+    if(name == "") {
+        alert("Name required");
+    }
+
+    employees.push({
+        name:name,
+        email:email,
+        password:password
+    });
+
+    document.getElementById("userName").innerHTML = name;
+    console.log("Saved user", employees);
+
+    document.cookie = "username=" + name;
+}
+
+function searchEmployee() {
+    var value = document.getElementById("search").value;
+    var result = "";
+
+    for(var i=0;i<employees.length;i++) {
+        if(employees[i].name.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+            result += "<p>" + employees[i].name + " - " + employees[i].email + "</p>";
+        }
+    }
+
+    document.getElementById("result").innerHTML = result;
+}
+
+function getData() {
+    fetch("http://example.com/api/employees")
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        employees = data;
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+}
+
+function unusedFunction() {
+    var x = 10;
+    var y = 20;
+    return x + y;
+}
+
+window.onload = function() {
+    getData();
+};
+
+</script>
+
+</body>
+</html>
